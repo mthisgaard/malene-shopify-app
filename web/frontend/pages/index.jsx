@@ -21,7 +21,7 @@ export default function HomePage() {
   const submitHandler = async (productID, selectedPrice) => {
     console.log(productID)
     console.log(selectedPrice)
-    const response = await fetch("/api/products/update", {
+    const response = await fetch("/api/products/updateprice", {
       method: 'POST',
       body:JSON.stringify({
         id: productID,
@@ -32,12 +32,20 @@ export default function HomePage() {
       },
     });
 
-    console.log(response)
-
     if (response.ok) {
       setShowToast(true)
     }
   };
+
+  const updateTitleHandler = async () => {
+    const response = await fetch("/api/products/updatetitles", {
+      method: 'POST'
+    });
+
+    if (response.ok) {
+      setShowToast(true)
+    }
+  }
 
   const toastMarkup = showToast ?
     <Toast
@@ -80,10 +88,10 @@ export default function HomePage() {
           </Card.Section>
           <Card.Section>
             <Button primary onClick={() => submitHandler(products[0].variants[0].id, newPrice)} disabled={!products.length}>Submit</Button>
+            <Button primary onClick={() => updateTitleHandler()}>Update titles</Button>
           </Card.Section>
         </Card>
         {toastMarkup}
-        <ProductsCard />
       </Page>
     </Frame>
   );

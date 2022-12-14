@@ -7,6 +7,7 @@ import serveStatic from "serve-static";
 import shopify from "./shopify.js";
 import productCreator from "./product-creator.js";
 import priceUpdater from "./price-updater.js";
+import titleUpdater from "./title-updater.js";
 import GDPRWebhookHandlers from "./gdpr.js";
 
 const PORT = parseInt(process.env.BACKEND_PORT || process.env.PORT, 10);
@@ -57,14 +58,26 @@ app.get("/api/products/create", async (_req, res) => {
   res.status(status).send({ success: status === 200, error });
 });
 
-app.post("/api/products/update", async (_req, res) => {
-  console.log(_req.body.id, 'logging the request id heyooo')
-  console.log(_req.body.price, 'logging the request price heyooo')
+app.post("/api/products/updateprice", async (_req, res) => {
   let status = 200;
   let error = null;
 
   try {
     await priceUpdater(res.locals.shopify.session, _req.body.id, _req.body.price);
+  } catch (e) {
+    console.log(`Failed to process: ${e.message}`);
+    status = 500;
+    error = e.message;
+  }
+  res.status(status).send({ success: status === 200, error });
+});
+
+app.post("/api/products/updatetitles", async (_req, res) => {
+  let status = 200;
+  let error = null;
+
+  try {
+    await titleUpdater(res.locals.shopify.session);
   } catch (e) {
     console.log(`Failed to process: ${e.message}`);
     status = 500;
