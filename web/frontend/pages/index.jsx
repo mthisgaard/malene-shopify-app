@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { Toast, Frame, Button, DataTable, Card, Heading, Page, Stack, TextField, EmptyState } from "@shopify/polaris";
+import { TextContainer, Toast, Frame, Button, DataTable, Card, Heading, Page, Stack, TextField, EmptyState } from "@shopify/polaris";
 import { ResourcePicker } from '@shopify/app-bridge-react';
 import { useAuthenticatedFetch } from "../hooks";
 import { ProductsCard } from "../components";
@@ -57,9 +57,11 @@ export default function HomePage() {
   return (
     <Frame>
       <Page>
-        <Heading>Product Price Update</Heading>
         <Card>
           <Card.Section>
+          <TextContainer>
+            <Heading>Update Price of Specific Product</Heading>
+          </TextContainer>
             <Stack vertical>
               <Button primary onClick={() => setPickerOpen(true)}>Select Product</Button>
               <ResourcePicker
@@ -88,7 +90,10 @@ export default function HomePage() {
           </Card.Section>
           <Card.Section>
             <Button primary onClick={() => submitHandler(products[0].variants[0].id, newPrice)} disabled={!products.length}>Submit</Button>
-            <Button primary onClick={() => updateTitleHandler()}>Update titles</Button>
+          </Card.Section>
+          <Card.Section>
+            <Heading>Update all product titles to a random new title</Heading>
+            <Button primary onClick={() => updateTitleHandler()}>Update Titles</Button>
           </Card.Section>
         </Card>
         {toastMarkup}

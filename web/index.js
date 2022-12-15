@@ -44,7 +44,6 @@ app.get("/api/products/count", async (_req, res) => {
 });
 
 app.get("/api/products/create", async (_req, res) => {
-  console.log(res, 'logging the result heyo')
   let status = 200;
   let error = null;
 
