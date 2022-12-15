@@ -9,8 +9,7 @@
     "dev": "shopify app dev",
     "info": "shopify app info",
     "generate": "shopify app generate",
-    "deploy": "shopify app deploy",
-    "start": "node web/index.js"
+    "deploy": "shopify app deploy"
   },
   "dependencies": {
     "@shopify/app": "3.25.0",
