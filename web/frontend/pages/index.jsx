@@ -59,9 +59,11 @@ export default function HomePage() {
       <Page>
         <Card>
           <Card.Section>
-          <TextContainer>
-            <Heading>Update Price of Specific Product</Heading>
-          </TextContainer>
+            <TextContainer>
+              <Heading>Update the price of a product</Heading>
+            </TextContainer>
+          </Card.Section>
+          <Card.Section>
             <Stack vertical>
               <Button primary onClick={() => setPickerOpen(true)}>Select Product</Button>
               <ResourcePicker
@@ -93,6 +95,8 @@ export default function HomePage() {
           </Card.Section>
           <Card.Section>
             <Heading>Update all product titles to a random new title</Heading>
+          </Card.Section>
+          <Card.Section>
             <Button primary onClick={() => updateTitleHandler()}>Update Titles</Button>
           </Card.Section>
         </Card>

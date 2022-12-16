@@ -6,8 +6,8 @@ import cron from "node-cron";
 const key = process.env.SHOPIFY_API_KEY
 
 
-cron.schedule('* * * * *', async () => {
-  console.log('running a task every minute');
+cron.schedule('1 * * * *', async () => {
+  console.log('running a task every hour');
 
   // Calling the titleUpdater function every hour to update product titles. 
   //    Issue - Getting an offline session to use for the instatiating the client.
@@ -24,10 +24,8 @@ const ADJECTIVES = [
 ]
 
 export default async function titleUpdater(session) {
-  console.log(session, 'logging the session')
 
   const client = new shopify.api.clients.Graphql({session});
-
 
   // Getting the product ID's to iterate title changes 
   //    Issue - Even though the query works in Shopifys GraphQL IDE and returns the products there, it does not work here.
